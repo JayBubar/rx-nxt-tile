@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting Xpress Tile</title>
+    <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
+    
+    <style>
+        /* NXT Dashboard Tile Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: transparent; /* Allows NXT background to show through */
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .tile-link {
+            text-decoration: none;
+            display: block;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tile-link:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-container {
+            width: 100%;
+            max-width: 250px; /* Scaling the 512x512 logo to fit a standard tile */
+            height: auto;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /* Subtle rounding often used in modern UI */
+            /* Add a subtle shadow to make the logo pop against the white tile */
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="tile-link">
+            <img src="logo.png" alt="Reporting Xpress Client Portal">
+        </a>
+    </div>
+
+    <script>
+        // Initialize communication with Raiser's Edge NXT
+        const client = new args.AddinClient.AddinClient({
+            callbacks: {
+                init: (args) => {
+                    // Registers the tile with the host page
+                    args.ready({
+                        showUI: true,
+                        title: 'Reporting Xpress'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
