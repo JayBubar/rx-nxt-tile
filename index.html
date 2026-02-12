@@ -54,19 +54,19 @@
         </a>
     </div>
 
-    <script>
-        // Initialize communication with Raiser's Edge NXT
-        const client = new args.AddinClient.AddinClient({
-            callbacks: {
-                init: (args) => {
-                    // Registers the tile with the host page
-                    args.ready({
-                        showUI: true,
-                        title: 'Reporting Xpress'
-                    });
-                }
+<script>
+    // The library exposes 'BBSkyAddinClient' to the global window object
+    const client = new BBSkyAddinClient.AddinClient({
+        callbacks: {
+            init: (args) => {
+                // This 'args' is local to this function, which is why the previous code failed
+                args.ready({
+                    showUI: true,
+                    title: 'Reporting Xpress'
+                });
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
