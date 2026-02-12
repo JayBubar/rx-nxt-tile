@@ -2,70 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporting Xpress Tile</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
-    
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            background-color: transparent;
-            font-family: "Segoe UI", Arial, sans-serif;
-            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background-color: #ffffff; /* Explicit white background for testing */
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            overflow: hidden;
         }
-        .tile-link {
-            text-decoration: none;
+        .logo-link {
             display: block;
-            transition: transform 0.2s ease-in-out;
+            width: 80%; /* Let it breathe in the tile */
+            transition: transform 0.2s;
         }
-        .tile-link:hover {
+        .logo-link:hover {
             transform: scale(1.05);
-        }
-        .logo-container {
-            width: 100%;
-            max-width: 280px; /* Adjusted for your 512x512 logo */
-            text-align: center;
         }
         img {
             width: 100%;
             height: auto;
-            /* Makes the logo pop against the NXT white background */
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            border: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="tile-link">
-            <img src="logo.png" alt="Reporting Xpress Client Portal">
-        </a>
-    </div>
+    <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="logo-link">
+        <img src="https://jaybubar.github.io/rx-nxt-tile/logo.png" alt="Reporting Xpress">
+    </a>
 
     <script>
-        // Use the global BBSkyAddinClient provided by the script tag above
-        (function() {
-            try {
-                const client = new BBSkyAddinClient.AddinClient({
-                    callbacks: {
-                        init: (args) => {
-                            // This tells NXT the tile is ready to be shown
-                            args.ready({
-                                showUI: true,
-                                title: 'Reporting Xpress'
-                            });
-                        }
-                    }
-                });
-            } catch (err) {
-                console.error("Add-in initialization failed:", err);
+        // Check for library every 100ms until loaded
+        var checkLibrary = setInterval(function() {
+            if (window.BBSkyAddinClient) {
+                clearInterval(checkLibrary);
+                initAddin();
             }
-        })();
+        }, 100);
+
+        function initAddin() {
+            var client = new BBSkyAddinClient.AddinClient({
+                callbacks: {
+                    init: function(args) {
+                        // This MUST be called for NXT to show the content
+                        args.ready({
+                            showUI: true,
+                            title: 'Reporting Xpress'
+                        });
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
