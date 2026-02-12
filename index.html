@@ -2,63 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporting Xpress Tile</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
-    
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: transparent;
-            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .tile-link {
-            text-decoration: none;
-            display: block;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .tile-link:hover {
-            transform: scale(1.03);
-        }
-        .logo-container {
-            width: 100%;
-            max-width: 250px;
-            text-align: center;
-        }
-        img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
-        }
+        body { margin: 0; background-color: transparent; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .logo-container { width: 100%; max-width: 250px; text-align: center; }
+        img { width: 100%; height: auto; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        img:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <div class="logo-container">
-        <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="tile-link">
-            <img src="logo.png" alt="Reporting Xpress Client Portal">
+        <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank">
+            <img src="https://jaybubar.github.io/rx-nxt-tile/logo.png" alt="Reporting Xpress">
         </a>
     </div>
 
     <script>
-        // Use BBSkyAddinClient to initialize
-        const client = new BBSkyAddinClient.AddinClient({
-            callbacks: {
-                init: (args) => {
-                    args.ready({
-                        showUI: true,
-                        title: 'Reporting Xpress'
-                    });
-                }
+        (function() {
+            // The library exposes 'BBSkyAddinClient'
+            if (window.BBSkyAddinClient) {
+                const client = new BBSkyAddinClient.AddinClient({
+                    callbacks: {
+                        init: (args) => {
+                            args.ready({
+                                showUI: true,
+                                title: 'Reporting Xpress'
+                            });
+                        }
+                    }
+                });
+            } else {
+                console.error("Blackbaud SKY Add-in Client library not found.");
             }
-        });
+        })();
     </script>
 </body>
 </html>
