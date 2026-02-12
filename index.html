@@ -7,11 +7,10 @@
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
     
     <style>
-        /* NXT Dashboard Tile Styling */
         body {
             margin: 0;
             padding: 0;
-            background-color: transparent; /* Allows NXT background to show through */
+            background-color: transparent;
             font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             overflow: hidden;
             display: flex;
@@ -19,29 +18,23 @@
             justify-content: center;
             height: 100vh;
         }
-
         .tile-link {
             text-decoration: none;
             display: block;
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .tile-link:hover {
             transform: scale(1.03);
         }
-
         .logo-container {
             width: 100%;
-            max-width: 250px; /* Scaling the 512x512 logo to fit a standard tile */
-            height: auto;
+            max-width: 250px;
             text-align: center;
         }
-
         img {
             width: 100%;
             height: auto;
-            border-radius: 8px; /* Subtle rounding often used in modern UI */
-            /* Add a subtle shadow to make the logo pop against the white tile */
+            border-radius: 8px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
         }
     </style>
@@ -54,19 +47,18 @@
         </a>
     </div>
 
-<script>
-    // The library exposes 'BBSkyAddinClient' to the global window object
-    const client = new BBSkyAddinClient.AddinClient({
-        callbacks: {
-            init: (args) => {
-                // This 'args' is local to this function, which is why the previous code failed
-                args.ready({
-                    showUI: true,
-                    title: 'Reporting Xpress'
-                });
+    <script>
+        // Use BBSkyAddinClient to initialize
+        const client = new BBSkyAddinClient.AddinClient({
+            callbacks: {
+                init: (args) => {
+                    args.ready({
+                        showUI: true,
+                        title: 'Reporting Xpress'
+                    });
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 </html>
