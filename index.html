@@ -5,8 +5,23 @@
     <title>Reporting Xpress Tile</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; background-color: white !important; display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; overflow: hidden; }
-        img { width: 220px; height: auto; cursor: pointer; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        body { 
+            margin: 0; 
+            background-color: white !important; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            width: 100vw; 
+            overflow: hidden; 
+        }
+        img { 
+            width: 250px; 
+            height: auto; 
+            cursor: pointer; 
+            display: block; 
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
     </style>
 </head>
 <body>
@@ -17,26 +32,33 @@
 
     <script>
         (function() {
-            function startHandshake() {
+            // Function to signal Blackbaud we are ready
+            function initTile() {
                 if (window.BBSkyAddinClient) {
                     const client = new BBSkyAddinClient.AddinClient({
                         callbacks: {
                             init: (args) => {
-                                // This is the 'postMessage' the console is asking for
-                                // It establishes the 'Trusted Origin' link
+                                // This is the 'Handshake' that clears the Origin Trust error
                                 args.ready({
                                     showUI: true,
                                     title: 'Reporting Xpress'
                                 });
+                                console.log("Reporting Xpress: Handshake Complete.");
                             }
                         }
                     });
                 } else {
-                    // If library isn't ready, wait 50ms and try again
-                    setTimeout(startHandshake, 50);
+                    // Retry in 50ms if library isn't loaded yet
+                    setTimeout(initTile, 50);
                 }
             }
-            startHandshake();
+
+            // Start the initialization sequence
+            if (document.readyState === 'complete') {
+                initTile();
+            } else {
+                window.addEventListener('load', initTile);
+            }
         })();
     </script>
 </body>
