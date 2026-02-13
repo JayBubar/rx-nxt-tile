@@ -1,65 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Reporting Xpress Tile</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
-    <style>
-        body { 
-            margin: 0; 
-            background-color: white !important; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            width: 100vw; 
-            overflow: hidden; 
-        }
-        img { 
-            width: 250px; 
-            height: auto; 
-            cursor: pointer; 
-            display: block; 
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-        }
-    </style>
 </head>
-<body>
-
+<body style="background-color: white;">
     <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank">
-        <img src="https://jaybubar.github.io/rx-nxt-tile/logo.png" alt="Reporting Xpress">
+        <img src="logo.png" style="width: 200px;">
     </a>
 
     <script>
-        (function() {
-            // Function to signal Blackbaud we are ready
-            function initTile() {
-                if (window.BBSkyAddinClient) {
-                    const client = new BBSkyAddinClient.AddinClient({
-                        callbacks: {
-                            init: (args) => {
-                                // This is the 'Handshake' that clears the Origin Trust error
-                                args.ready({
-                                    showUI: true,
-                                    title: 'Reporting Xpress'
-                                });
-                                console.log("Reporting Xpress: Handshake Complete.");
-                            }
-                        }
-                    });
-                } else {
-                    // Retry in 50ms if library isn't loaded yet
-                    setTimeout(initTile, 50);
+        // No checks, no loops—just the bare minimum required signal
+        var client = new BBSkyAddinClient.AddinClient({
+            callbacks: {
+                init: function(args) {
+                    args.ready({ showUI: true, title: 'Reporting Xpress' });
                 }
             }
-
-            // Start the initialization sequence
-            if (document.readyState === 'complete') {
-                initTile();
-            } else {
-                window.addEventListener('load', initTile);
-            }
-        })();
+        });
     </script>
 </body>
 </html>
