@@ -5,60 +5,40 @@
     <title>Reporting Xpress Tile</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #ffffff; /* Explicit white background for testing */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .logo-link {
-            display: block;
-            width: 80%; /* Let it breathe in the tile */
-            transition: transform 0.2s;
-        }
-        .logo-link:hover {
-            transform: scale(1.05);
-        }
-        img {
-            width: 100%;
-            height: auto;
-            border: none;
-        }
+        body { margin: 0; background-color: white; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .logo-container { text-align: center; width: 100%; }
+        img { max-width: 250px; cursor: pointer; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
     </style>
 </head>
 <body>
 
-    <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="logo-link">
-        <img src="https://jaybubar.github.io/rx-nxt-tile/logo.png" alt="Reporting Xpress">
-    </a>
+    <div class="logo-container">
+        <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank">
+            <img src="https://jaybubar.github.io/rx-nxt-tile/logo.png" alt="Reporting Xpress">
+        </a>
+    </div>
 
     <script>
-        // Check for library every 100ms until loaded
-        var checkLibrary = setInterval(function() {
+        (function() {
+            // Ensure library is present
             if (window.BBSkyAddinClient) {
-                clearInterval(checkLibrary);
-                initAddin();
-            }
-        }, 100);
-
-        function initAddin() {
-            var client = new BBSkyAddinClient.AddinClient({
-                callbacks: {
-                    init: function(args) {
-                        // This MUST be called for NXT to show the content
-                        args.ready({
-                            showUI: true,
-                            title: 'Reporting Xpress'
-                        });
-                    }
+                try {
+                    const client = new BBSkyAddinClient.AddinClient({
+                        callbacks: {
+                            init: (args) => {
+                                // This is the 'Handshake' that makes the tile visible
+                                args.ready({
+                                    showUI: true,
+                                    title: 'Reporting Xpress'
+                                });
+                            }
+                        }
+                    });
+                } catch (e) {
+                    console.error("Initialization error:", e);
                 }
-            });
-        }
+            }
+        })();
     </script>
 </body>
 </html>
