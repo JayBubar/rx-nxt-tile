@@ -2,71 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reporting Xpress - Future of Fundraising</title>
+    <title>Reporting Xpress POC</title>
     <script src="https://sky.blackbaudcdn.net/static/sky-addin-client/1/sky-addin-client.umd.min.js"></script>
     <style>
         body {
             margin: 0;
-            padding: 10px;
+            padding: 20px;
             background-color: #ffffff;
             font-family: "Segoe UI", Arial, sans-serif;
-            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             box-sizing: border-box;
         }
-        .header-logo {
-            width: 70px; /* Slightly smaller to save vertical space */
-            margin-bottom: 5px;
-        }
+
+        /* Header Message */
         h2 {
-            font-size: 15px;
+            font-size: 18px;
             color: #0076ad;
-            margin: 0 0 10px 0;
+            margin: 0 0 20px 0;
             font-weight: 600;
         }
-        .preview-container {
-            width: 95%;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            border: 1px solid #e2e1e1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            overflow: hidden;
-            background-color: #f9f9f9;
-        }
-        .preview-img {
+
+        /* Side-by-Side Container */
+        .content-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: auto; /* This prevents the "cut off" look */
-            display: block;
+            gap: 25px;
+            margin-bottom: 25px;
         }
+
+        .logo-col {
+            flex: 0 0 120px; /* Fixed width for the logo */
+            text-align: center;
+        }
+
+        .logo-col img {
+            width: 100%;
+            height: auto;
+        }
+
+        .preview-col {
+            flex: 1; /* Takes up remaining space */
+            max-width: 450px;
+        }
+
+        .preview-col img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #e2e1e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Action Button */
         .cta-button {
             display: inline-block;
             background-color: #0076ad;
             color: white;
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 12px 30px;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            transition: background-color 0.2s, transform 0.1s;
+            transition: all 0.2s;
         }
+
         .cta-button:hover {
             background-color: #005a85;
-            transform: translateY(-1px);
+            transform: scale(1.02);
         }
     </style>
 </head>
 <body>
 
-    <img src="logo.png" class="header-logo" alt="RX Logo">
-    
     <h2>Welcome to the Future of Fundraising</h2>
 
-    <div class="preview-container">
-        <img src="preview.jpg" class="preview-img" alt="Dashboard Preview">
+    <div class="content-row">
+        <div class="logo-col">
+            <img src="logo.png" alt="Reporting Xpress Logo">
+        </div>
+        <div class="preview-col">
+            <img src="preview.jpg" alt="Getting Started Dashboard Preview">
+        </div>
     </div>
 
     <a href="https://demo.reportingxpress.org/ReportExplorer" target="_blank" class="cta-button">
